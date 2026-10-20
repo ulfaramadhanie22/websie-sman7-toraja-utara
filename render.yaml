@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: sman7-toraja-utara
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: INITIAL_ADMIN_USERNAME
+        sync: false
+      - key: INITIAL_ADMIN_PASSWORD
+        sync: false
+      - key: DATABASE_PATH
+        value: /var/data/sekolah.db
+    disk:
+      name: sekolah-data
+      mountPath: /var/data
+      sizeGB: 1
